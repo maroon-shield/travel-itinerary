@@ -2,5 +2,13 @@
 @import "tailwindcss";
 
 @theme {
+  --color-paper: #f5f3ee;
+  --color-surface: #eae8e2;
+  --color-ink: #3e4140;
+  --color-muted: #85847f;
+  --color-border: #d5d1c9;
+  --color-wood: #8a7563;
+  --color-olive: #7c8375;
+
   --font-sans: "Noto Sans JP", sans-serif;
 }

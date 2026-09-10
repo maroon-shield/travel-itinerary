@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { format, parseISO } from "date-fns";
 import { MapPin, Calendar } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
+import bannerImg from "~/assets/banner-sample.png";
 import { schedules } from "~/mocks/schedules";
 import { trip } from "~/mocks/trip";
 import { formatScheduleTime } from "~/utils/formatScheduleTime";
@@ -23,7 +24,10 @@ export default function DayView() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col">
-      <div className="h-30 bg-[url(src/assets/banner-sample.png)] bg-cover bg-center bg-no-repeat">
+      <div
+        className="h-30 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${bannerImg})` }}
+      >
         <div className="text-paper relative top-0 left-0 flex h-30 items-center justify-center bg-black/30 text-2xl font-thin">
           {trip.destination}旅行
         </div>

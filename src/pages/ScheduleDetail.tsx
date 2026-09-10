@@ -1,5 +1,6 @@
-import { ArrowLeft, LoaderCircle } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
+import { LoadingSpinner } from "~/components/LoadingSpinner";
 import { schedules } from "~/mocks/schedules.ts";
 import { formatScheduleTime } from "~/utils/formatScheduleTime.ts";
 
@@ -75,24 +76,11 @@ export function ScheduleMap({ location }: { location: string }) {
       <iframe
         title={`${location}の地図`}
         src={mapUrl}
-        className="aspect-video w-full border-0"
+        className="aspect-video border-0"
         loading="lazy"
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
       />
     </div>
-  );
-}
-
-function LoadingSpinner() {
-  return (
-    <main className="bg-paper mx-auto flex min-h-screen max-w-md items-center justify-center">
-      <LoaderCircle
-        aria-label="Loading"
-        className="text-ink/50 animate-spin"
-        size={40}
-        strokeWidth={2}
-      />
-    </main>
   );
 }

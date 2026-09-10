@@ -2,9 +2,10 @@ import { TabGroup, TabList, TabPanels, TabPanel, Tab } from "@headlessui/react";
 import clsx from "clsx";
 import { format, parseISO } from "date-fns";
 import { MapPin, Calendar } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { schedules } from "~/mocks/schedules";
 import { trip } from "~/mocks/trip";
+import { formatScheduleTime } from "~/utils/formatScheduleTime";
 
 export default function DayView() {
   const dates = [...new Set(schedules.map((schedule) => schedule.date))].sort();
@@ -55,21 +56,17 @@ export default function DayView() {
                   {schedules
                     .filter((schedule) => schedule.date === date)
                     .map((schedule) => (
-                      <div
+                      <Link
                         key={schedule.id}
                         className="border-muted/20 rounded-lg border p-3"
+                        to={`/schedule/${schedule.id}`}
                       >
-                        <div className="flex">
-                          <p className="text-muted text-sm">
-                            {schedule.startTime}
-                          </p>
-
-                          {schedule.endTime && (
-                            <p className="text-muted text-sm">
-                              &nbsp;- {schedule.endTime}
-                            </p>
+                        <p className="text-muted text-sm">
+                          {formatScheduleTime(
+                            schedule.startTime,
+                            schedule.endTime,
                           )}
-                        </div>
+                        </p>
 
                         <p className="text-ink mb-0.5 text-lg">
                           {schedule.title}
@@ -84,7 +81,7 @@ export default function DayView() {
                             {schedule.location}
                           </p>
                         ) : null}
-                      </div>
+                      </Link>
                     ))}
                 </div>
               </TabPanel>

@@ -2,6 +2,7 @@ import { TabGroup, TabList, TabPanels, TabPanel, Tab } from "@headlessui/react";
 import clsx from "clsx";
 import { format, parseISO } from "date-fns";
 import { MapPin, Calendar } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { Link, useSearchParams } from "react-router-dom";
 import bannerImg from "~/assets/banner-sample.png";
 import { schedules } from "~/mocks/schedules";
@@ -23,7 +24,7 @@ export default function DayView() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col">
+    <div className="mx-auto flex min-h-screen max-w-md flex-col">
       <div
         className="h-30 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${bannerImg})` }}
@@ -56,44 +57,53 @@ export default function DayView() {
           <TabPanels>
             {dates.map((date) => (
               <TabPanel key={date}>
-                <div className="mt-5 flex flex-col gap-3">
-                  {schedules
-                    .filter((schedule) => schedule.date === date)
-                    .map((schedule) => (
-                      <Link
-                        key={schedule.id}
-                        className="border-muted/20 rounded-lg border p-3"
-                        to={`/schedule/${schedule.id}`}
-                      >
-                        <p className="text-muted text-sm">
-                          {formatScheduleTime(
-                            schedule.startTime,
-                            schedule.endTime,
-                          )}
-                        </p>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 4 }}
+                    key={selectedIndex}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                  >
+                    <div className="mt-5 flex flex-col gap-3">
+                      {schedules
+                        .filter((schedule) => schedule.date === date)
+                        .map((schedule) => (
+                          <Link
+                            key={schedule.id}
+                            className="border-muted/20 rounded-lg border p-3"
+                            to={`/schedule/${schedule.id}`}
+                          >
+                            <p className="text-muted text-sm">
+                              {formatScheduleTime(
+                                schedule.startTime,
+                                schedule.endTime,
+                              )}
+                            </p>
 
-                        <p className="text-ink mb-0.5 text-lg">
-                          {schedule.title}
-                        </p>
+                            <p className="text-ink mb-0.5 text-lg">
+                              {schedule.title}
+                            </p>
 
-                        {schedule.description ? (
-                          <p className="text-muted text-sm">
-                            {schedule.description}
-                          </p>
-                        ) : schedule.location ? (
-                          <p className="text-muted text-sm">
-                            {schedule.location}
-                          </p>
-                        ) : null}
-                      </Link>
-                    ))}
-                </div>
+                            {schedule.description ? (
+                              <p className="text-muted text-sm">
+                                {schedule.description}
+                              </p>
+                            ) : schedule.location ? (
+                              <p className="text-muted text-sm">
+                                {schedule.location}
+                              </p>
+                            ) : null}
+                          </Link>
+                        ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </TabPanel>
             ))}
           </TabPanels>
         </TabGroup>
       </div>
-    </main>
+    </div>
   );
 }
 

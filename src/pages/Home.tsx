@@ -7,13 +7,13 @@ export default function Home() {
   const { logout } = useAuth0();
 
   return (
-    <main
+    <div
       className="mx-auto flex min-h-screen max-w-md flex-col bg-cover px-5 py-10 font-thin"
       style={{ backgroundImage: `url(${heroImg})` }}
     >
       <div className="flex justify-end px-5">
         <button
-          className="text-paper/70 border-border/80 flex-0 rounded-lg border px-2 py-1"
+          className="text-paper/70 border-border/80 flex-0 cursor-pointer rounded-lg border px-2 py-1"
           onClick={() =>
             logout({ logoutParams: { returnTo: window.location.origin } })
           }
@@ -36,6 +36,6 @@ export default function Home() {
       >
         出発する
       </Link>
-    </main>
+    </div>
   );
 }

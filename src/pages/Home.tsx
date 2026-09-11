@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
 import heroImg from "~/assets/hero-sample.png";
+import { DayViewButton } from "~/components/DayViewButton";
 import { trip } from "~/mocks/trip";
 
 export default function Home() {
@@ -30,12 +30,7 @@ export default function Home() {
         <p className="text-surface/80 px-1.5">{`${trip.startDate.replaceAll("-", ".")} - ${trip.endDate.replaceAll("-", ".")}`}</p>
       </div>
 
-      <Link
-        className="text-paper bg-ink rounded-full p-4 text-center"
-        to="/day-view"
-      >
-        出発する
-      </Link>
+      <DayViewButton text="出発する" />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { LoadingSpinner } from "~/components/LoadingSpinner";
 import DayView from "~/pages/DayView";
 import Home from "~/pages/Home";
+import NotFound from "~/pages/NotFound";
 import ScheduleDetail from "~/pages/ScheduleDetail";
 import ScheduleEdit from "~/pages/ScheduleEdit";
 
@@ -29,6 +30,8 @@ function App() {
           <Route path="/day-view" element={<DayView />} />
           <Route path="/schedule/:id" element={<ScheduleDetail />} />
           <Route path="/schedule/:id/edit" element={<ScheduleEdit />} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       )}
     </Fade>

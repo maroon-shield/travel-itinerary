@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import { LoadingSpinner } from "~/components/LoadingSpinner";
 import { schedules } from "~/mocks/schedules.ts";
+import NotFound from "~/pages/NotFound.tsx";
 import { formatScheduleTime } from "~/utils/formatScheduleTime.ts";
 
 export default function ScheduleDetail() {
@@ -62,7 +62,7 @@ export default function ScheduleDetail() {
       </main>
     </div>
   ) : (
-    <LoadingSpinner />
+    <NotFound />
   );
 }
 
